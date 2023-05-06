@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "build:npm": "deno run -A tasks/build_npm.ts",
+    "fmt": "deno fmt --ignore=npm",
+    "fmt:check": "deno fmt --check --ignore=npm",
+    "lint": "deno lint --ignore=npm",
+    "test": "deno test --allow-all --ignore=npm"
+  }
+}
