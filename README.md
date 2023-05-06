@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/streaming-tar">
-    <img src="https://img.shields.io/npm/v/streamig-tar?style=for-the-badge" alt="downloads" height="24">
+    <img src="https://img.shields.io/npm/v/streaming-tar?style=for-the-badge" alt="downloads" height="24">
   </a>
   <a href="https://www.npmjs.com/package/streaming-tar">
-    <img src="https://img.shields.io/github/actions/workflow/status/zebp/streamig-tar/ci.yml?branch=main&style=for-the-badge" alt="npm version" height="24">
+    <img src="https://img.shields.io/github/actions/workflow/status/zebp/streaming-tar/ci.yml?branch=main&style=for-the-badge" alt="npm version" height="24">
   </a>
   <a href="https://github.com/zebp/streaming-tar">
     <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT license" height="24">
