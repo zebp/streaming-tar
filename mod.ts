@@ -1,6 +1,6 @@
 import { Deferred } from "./deferred.ts";
 import { EntryImpl } from "./entry.ts";
-import { Header } from "./header.ts";
+import { FileType, Header } from "./header.ts";
 
 const initialChecksum = 8 * 32;
 
@@ -28,6 +28,10 @@ export interface TarEntry {
    * The size of the file in bytes.
    */
   readonly fileSize: number;
+  /**
+   * The type of file archived.
+   */
+  readonly type: FileType;
   /**
    * The contents of the file.
    */

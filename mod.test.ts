@@ -23,11 +23,13 @@ async function tarStream(
       await archive.append(`file${i}`, {
         reader: new Buffer(bytes),
         contentSize: bytes.length,
+        type: "file",
       });
     } else {
       await archive.append(`file${i}`, {
         reader: new Buffer(content),
         contentSize: content.length,
+        type: "file",
       });
     }
   }
@@ -43,6 +45,7 @@ Deno.test("single of block size", async () => {
   assertFalse(result.done);
   assertEquals(result.value.name, "file0");
   assertEquals(result.value.fileSize, 512);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), text);
 
   result = await entriesIter.next();
@@ -57,6 +60,7 @@ Deno.test("single smaller than block", async () => {
   assertFalse(result.done);
   assertEquals(result.value.name, "file0");
   assertEquals(result.value.fileSize, 100);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), text);
 
   result = await entriesIter.next();
@@ -71,6 +75,7 @@ Deno.test("single larger than block", async () => {
   assertFalse(result.done);
   assertEquals(result.value.name, "file0");
   assertEquals(result.value.fileSize, 5000);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), text);
 
   result = await entriesIter.next();
@@ -90,18 +95,21 @@ Deno.test("multiple entries same sizes", async () => {
   assertFalse(result.done);
   assertEquals(result.value.name, "file0");
   assertEquals(result.value.fileSize, length);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "a".repeat(length));
 
   result = await entriesIter.next();
   assertFalse(result.done);
   assertEquals(result.value.name, "file1");
   assertEquals(result.value.fileSize, length);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "b".repeat(length));
 
   result = await entriesIter.next();
   assertFalse(result.done);
   assertEquals(result.value.name, "file2");
   assertEquals(result.value.fileSize, length);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "c".repeat(length));
 
   result = await entriesIter.next();
@@ -119,18 +127,21 @@ Deno.test("multiple entries varying sizes", async () => {
   assertFalse(result.done);
   assertEquals(result.value.name, "file0");
   assertEquals(result.value.fileSize, 31252);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "a".repeat(31252));
 
   result = await entriesIter.next();
   assertFalse(result.done);
   assertEquals(result.value.name, "file1");
   assertEquals(result.value.fileSize, 1217863);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "b".repeat(1217863));
 
   result = await entriesIter.next();
   assertFalse(result.done);
   assertEquals(result.value.name, "file2");
   assertEquals(result.value.fileSize, 63123);
+  assertEquals(result.value.type, "file");
   assertEquals(await result.value.text(), "c".repeat(63123));
 
   result = await entriesIter.next();

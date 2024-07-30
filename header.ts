@@ -1,5 +1,18 @@
 const textDecoder = new TextDecoder();
 
+enum FileTypes {
+  "file" = 0,
+  "link" = 1,
+  "symlink" = 2,
+  "character-device" = 3,
+  "block-device" = 4,
+  "directory" = 5,
+  "fifo" = 6,
+  "contiguous-file" = 7,
+}
+
+export type FileType = keyof typeof FileTypes;
+
 export class Header {
   #data: Uint8Array;
 
@@ -31,5 +44,11 @@ export class Header {
   get checksum(): number {
     const checksumBytes = this.#data.slice(148, 156);
     return parseInt(textDecoder.decode(checksumBytes), 8);
+  }
+
+  get type(): FileType {
+    const typeBytes = this.#data.slice(156, 157);
+    const typeCode = parseInt(textDecoder.decode(typeBytes), 10);
+    return FileTypes[typeCode] as FileType;
   }
 }

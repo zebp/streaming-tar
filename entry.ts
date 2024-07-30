@@ -1,4 +1,4 @@
-import { Header } from "./header.ts";
+import { FileType, Header } from "./header.ts";
 
 export class EntryImpl {
   #header;
@@ -29,6 +29,10 @@ export class EntryImpl {
 
   get fileSize(): number {
     return this.#header.fileSize;
+  }
+
+  get type(): FileType {
+    return this.#header.type;
   }
 
   get #withinEntry(): ReadableStream<Uint8Array> {
